@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/address")
@@ -21,9 +22,24 @@ public class AddressController {
      public ResponseEntity<List<AddressModel>> getAllContacts(){
          return ResponseEntity.ok(addressService.getAllContacts());
      }
+     @GetMapping("/contact/{id}")
+     public ResponseEntity<Optional<AddressModel>> getContactById(@PathVariable Long id){
+         Optional<AddressModel> contact=addressService.getContactById(id);
+         return contact.isPresent() ?ResponseEntity.ok(contact):ResponseEntity.notFound().build();
+     }
     @PostMapping("/add")
     public ResponseEntity<AddressModel> addEntry(@RequestBody AddressDTO addressDTO){
         AddressModel newEntry=addressService.addEntry(addressDTO);
         return ResponseEntity.ok(newEntry);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<AddressModel> updateEntry(@PathVariable Long id,@RequestBody AddressDTO addressDTO){
+         Optional<AddressModel> updateEntry=addressService.updateEntry(id,addressDTO);
+         return updateEntry.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEntry(@PathVariable Long id) {
+        boolean isDeleted = addressService.deleteEntry(id);
+        return isDeleted ? ResponseEntity.ok("Contact deleted successfully ") : ResponseEntity.notFound().build();
     }
 }
