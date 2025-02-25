@@ -1,5 +1,6 @@
 package com.bridgelabz.employeepayrollapp.model;
 import jakarta.persistence.*;
+
 @Entity
 public class EmployeeModel {
     @Id
