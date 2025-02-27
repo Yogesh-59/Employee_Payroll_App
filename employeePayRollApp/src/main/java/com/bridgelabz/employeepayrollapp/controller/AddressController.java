@@ -6,7 +6,7 @@ import com.bridgelabz.employeepayrollapp.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +28,7 @@ public class AddressController {
          return contact.isPresent() ?ResponseEntity.ok(contact):ResponseEntity.notFound().build();
      }
     @PostMapping("/add")
-    public ResponseEntity<AddressModel> addEntry(@RequestBody AddressDTO addressDTO){
+    public ResponseEntity<AddressModel> addEntry(@Valid @RequestBody AddressDTO addressDTO){
         AddressModel newEntry=addressService.addEntry(addressDTO);
         return ResponseEntity.ok(newEntry);
     }
