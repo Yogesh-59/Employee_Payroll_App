@@ -1,9 +1,12 @@
 package com.bridgelabz.employeepayrollapp.controller;
+
+import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.model.EmployeeModel;
 import com.bridgelabz.employeepayrollapp.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
-import java.util.Optional;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -14,8 +17,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/post")
-    public EmployeeModel addEmployee(@RequestBody EmployeeModel employee) {
-        return service.addEmployee(employee);
+    public EmployeeModel addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return service.addEmployee(employeeDTO);
     }
 
     @GetMapping("/get")
@@ -24,13 +27,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Optional<EmployeeModel> getEmployeeById(@PathVariable Long id) {
+    public EmployeeModel getEmployeeById(@PathVariable Long id) {
         return service.getEmployeeById(id);
     }
 
     @PutMapping("/{id}")
-    public EmployeeModel updateEmployee(@PathVariable Long id, @RequestBody EmployeeModel employee) {
-        return service.updateEmployee(id, employee);
+    public EmployeeModel updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
+        return service.updateEmployee(id, employeeDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -38,5 +41,4 @@ public class EmployeeController {
         service.deleteEmployee(id);
         return "Employee deleted successfully!";
     }
-
 }

@@ -1,50 +1,38 @@
 package com.bridgelabz.employeepayrollapp.model;
+import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import jakarta.persistence.*;
+import lombok.Data;
 
+import java.time.LocalDate;
+
+@Data
 @Entity
 public class EmployeeModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public String name;
-    public String department;
-    public double salary;
+    private Long id;
 
-    // Constructors
-    public EmployeeModel() {}
+    private String name;
+    private Double salary;
+    private String gender;
+    private LocalDate startDate;
+    private String note;
+    private String profilePic;
+    private String department;
 
-    public EmployeeModel(String name, String department, double salary) {
-        this.name = name;
-        this.department = department;
-        this.salary = salary;
-    }
-
-    // Getters & Setters
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
+    // Constructor to create EmployeeModel from EmployeeDTO
+    public EmployeeModel(EmployeeDTO employeeDTO) {
+        this.name = employeeDTO.getName();
+        this.salary = employeeDTO.getSalary();
+        this.gender = employeeDTO.getGender();
+        this.startDate = employeeDTO.getStartDate();
+        this.note = employeeDTO.getNote();
+        this.profilePic = employeeDTO.getProfilePic();
+        this.department = employeeDTO.getDepartment();
     }
 
-    public String getDepartment() {
-        return department;
-    }
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-    public void setSalary(double salary) {
-        this.salary = salary;
+    // Default constructor (required by JPA)
+    public EmployeeModel() {
     }
 }
