@@ -5,6 +5,7 @@ import com.bridgelabz.employeepayrollapp.model.EmployeeModel;
 import com.bridgelabz.employeepayrollapp.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,10 @@ public class EmployeeController {
     public List<EmployeeModel> getAllEmployees() {
         log.info("Received request to fetch all employees");
         return service.getAllEmployees();
+    }
+    @GetMapping("/department/sales")
+    public ResponseEntity<List<EmployeeModel>> getSalesDepartmentEmployees() {
+        return ResponseEntity.ok(service.getSalesDepartmentEmployees());
     }
 
     @GetMapping("/{id}")

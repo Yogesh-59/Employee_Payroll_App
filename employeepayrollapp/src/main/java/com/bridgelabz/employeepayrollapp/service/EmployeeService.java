@@ -52,6 +52,9 @@ public class EmployeeService {
                 })
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with ID: " + id));
     }
+    public List<EmployeeModel> getSalesDepartmentEmployees() {
+        return repository.findSalesDepartmentEmployees();
+    }
 
     public void deleteEmployee(Long id) {
         log.info("Deleting employee with ID: {}", id);

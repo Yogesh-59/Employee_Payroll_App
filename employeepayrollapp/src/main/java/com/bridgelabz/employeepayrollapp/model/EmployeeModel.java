@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "employee")
+@Table(name = "employee_payroll")
 public class EmployeeModel {
 
     @Id
