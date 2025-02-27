@@ -1,4 +1,5 @@
 package com.bridgelabz.employeepayrollapp.dto;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -17,10 +18,12 @@ public class EmployeeDTO {
     private Double salary;
 
     @NotBlank(message = "Gender is mandatory")
+    @Pattern(regexp = "Male|Female|Other", message = "Gender must be Male, Female, or Other")
     private String gender;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd") // Use the correct format for deserialization
     @NotNull(message = "Start date is mandatory")
+    @PastOrPresent(message = "Start date must be today or in the past")
     private LocalDate startDate;
 
     @NotBlank(message = "Note is mandatory")
