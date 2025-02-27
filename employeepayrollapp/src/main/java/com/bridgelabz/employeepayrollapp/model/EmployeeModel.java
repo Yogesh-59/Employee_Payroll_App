@@ -7,19 +7,34 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@Table(name = "employee")
 public class EmployeeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "salary", nullable = false)
     private Double salary;
+
+    @Column(name = "gender", nullable = false)
     private String gender;
+
+    @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
+
+    @Column(name = "note", nullable = false)
     private String note;
+
+    @Column(name = "profile_pic", nullable = false)
     private String profilePic;
+
+    @Column(name = "department", nullable = false)
     private String department;
+
 
     // Constructor to create EmployeeModel from EmployeeDTO
     public EmployeeModel(EmployeeDTO employeeDTO) {
