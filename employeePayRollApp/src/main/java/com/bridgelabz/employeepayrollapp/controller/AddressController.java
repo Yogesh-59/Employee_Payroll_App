@@ -33,7 +33,7 @@ public class AddressController {
         return ResponseEntity.ok(newEntry);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<AddressModel> updateEntry(@PathVariable Long id,@RequestBody AddressDTO addressDTO){
+    public ResponseEntity<AddressModel> updateEntry(@PathVariable Long id,@Valid @RequestBody AddressDTO addressDTO){
          Optional<AddressModel> updateEntry=addressService.updateEntry(id,addressDTO);
          return updateEntry.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
